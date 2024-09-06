@@ -3,28 +3,27 @@ package com.senai.seventhClass.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senai.seventhClass.repositories.TimeFutebolRepository;
+import com.senai.seventhClass.services.TimeFutebolService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/times")
+@RequestMapping("/time-futebol")
 
 public class TimeFutebolController {
     
     @Autowired // serve para não precisar instanciar
-    TimeFutebolRepository timeFutebolRepository;
+    TimeFutebolService timeFutebolService;
 
     @GetMapping
     public ResponseEntity getTimes() {
 
-        timeFutebolRepository.findAll();
+        var times = timeFutebolService.getAllTimes();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(times);
     }
     
 }
